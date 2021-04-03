@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'v1',
-    'namespace' => '\\App\\Http\\Controllers\\',
+    'namespace' => '\\App\\Http\\Controllers\\Api',
 ], function () {
     Route::get('/students/{id}', 'StudentsController@show')->name('api.students.show');
     Route::put('/students/{id}', 'StudentsController@update')->name('api.students.update');
