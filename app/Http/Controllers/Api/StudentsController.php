@@ -5,21 +5,24 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
+use Flugg\Responder\Responder;
 
 class StudentsController extends Controller
 {
 
     protected $studentService;
+    protected $responder;
 
-    public function __construct(StudentService $studentService)
+    public function __construct(StudentService $studentService, Responder $responder)
     {
         $this->studentService = $studentService;
+        $this->responder = $responder;;
     }
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Flugg\Responder\Http\Responses\SuccessResponseBuilder
      */
     public function index(Request $request)
     {
@@ -28,7 +31,7 @@ class StudentsController extends Controller
 
         $students = $this->studentService->getStudents($perPage, $keywords);
 
-        return $students;
+        return $this->responder->success($students);
     }
 
     /**
