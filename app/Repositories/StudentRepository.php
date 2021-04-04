@@ -32,8 +32,9 @@ class StudentRepository implements StudentInterface
             ->appends($this->request->query());
     }
 
-    public function getStudent($id)
+    public function getStudent(string $id)
     {
+        return $this->entity::find($id);
     }
 
     public function createStudent(array $data): Student

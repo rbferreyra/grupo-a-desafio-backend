@@ -22,4 +22,9 @@ class StudentService
     {
         return $this->repository->createStudent($data);
     }
+
+    public function getStudent(string $id)
+    {
+        return $this->repository->getStudent($id);
+    }
 }
