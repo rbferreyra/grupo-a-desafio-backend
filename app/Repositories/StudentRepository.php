@@ -42,8 +42,11 @@ class StudentRepository implements StudentInterface
         return $this->entity->create($data);
     }
 
-    public function updateStudent($id, $data)
+    public function updateStudent(string $id, array $data)
     {
+        $student = $this->getStudent($id);
+        $student->update($data);
+        return $student;
     }
 
     public function destroyStudent($id)

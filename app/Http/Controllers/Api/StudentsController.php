@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 use App\Services\StudentService;
 use Exception;
 use Flugg\Responder\Responder;
@@ -77,13 +78,28 @@ class StudentsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\UpdateStudentRequest  $request
+     * @param  string  $id
+     * @return \Flugg\Responder\Http\Responses\SuccessResponseBuilder
      */
-    public function update(Request $request, $id)
+    public function update(UpdateStudentRequest $request, $id)
     {
-        echo 'atualizar um estudante ' . $id;
+        try {
+            $student = $this->studentService->getStudent($id);
+
+            if (!$student) {
+                return $this->responder->error(404, 'Student not found or not exists!')->respond(404);
+            }
+
+            $data = $request->all();
+
+            $newStudent = $this->studentService->updateStudent($id, $data);
+
+            return $this->responder->success($newStudent);
+        } catch (Exception $e) {
+            Log::error($e);
+            return $this->responder->error(500, 'An error occurred while trying to update the student!')->respond(500);
+        }
     }
 
     /**
