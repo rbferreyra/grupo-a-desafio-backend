@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Transformers\StudentTransformer;
+use Flugg\Responder\Contracts\Transformable;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Student extends Model implements Transformable
 {
     use HasFactory,
         Uuid;
@@ -39,4 +41,15 @@ class Student extends Model
         'ra',
         'cpf'
     ];
+
+    /**
+     * Get a transformer for the class.
+     *
+     * @return \Flugg\Responder\Transformers\Transformer|string|callable
+     */
+    public function transformer()
+    {
+        return StudentTransformer::class;
+    }
+
 }
