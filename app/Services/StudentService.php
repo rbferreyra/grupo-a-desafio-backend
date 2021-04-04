@@ -17,4 +17,9 @@ class StudentService
     {
         return $this->repository->getStudents($perPage, $keywords);
     }
+
+    public function createStudent(array $data)
+    {
+        return $this->repository->createStudent($data);
+    }
 }

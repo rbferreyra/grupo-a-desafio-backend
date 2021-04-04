@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateStudentRequest;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
 use Flugg\Responder\Responder;
@@ -40,9 +41,13 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateStudentRequest $request)
     {
-        echo 'criar um estudante';
+        $data = $request->all();
+
+        $student = $this->studentService->createStudent($data);
+
+        return $this->responder->success($student)->respond(201);
     }
 
     /**
