@@ -27,4 +27,9 @@ class StudentService
     {
         return $this->repository->getStudent($id);
     }
+
+    public function updateStudent(string $id, array $data)
+    {
+        return $this->repository->updateStudent($id, $data);
+    }
 }
