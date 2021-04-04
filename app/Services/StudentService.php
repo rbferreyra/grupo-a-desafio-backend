@@ -32,4 +32,9 @@ class StudentService
     {
         return $this->repository->updateStudent($id, $data);
     }
+
+    public function destroyStudent(string $id)
+    {
+        return $this->repository->destroyStudent($id);
+    }
 }

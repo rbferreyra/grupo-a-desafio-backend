@@ -32,7 +32,7 @@ class StudentRepository implements StudentInterface
             ->appends($this->request->query());
     }
 
-    public function getStudent(string $id)
+    public function getStudent(string $id): ?Student
     {
         return $this->entity::find($id);
     }
@@ -42,14 +42,27 @@ class StudentRepository implements StudentInterface
         return $this->entity->create($data);
     }
 
-    public function updateStudent(string $id, array $data)
+    public function updateStudent(string $id, array $data): ?Student
     {
         $student = $this->getStudent($id);
+
+        if (!$student) {
+            return null;
+        }
+
         $student->update($data);
         return $student;
     }
 
-    public function destroyStudent($id)
+    public function destroyStudent(string $id): ?Student
     {
+        $student = $this->getStudent($id);
+
+        if (!$student) {
+            return null;
+        }
+
+        $student->delete();
+        return $student;
     }
 }
