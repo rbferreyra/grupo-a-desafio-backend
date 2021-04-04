@@ -3,21 +3,32 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Student;
+use App\Services\StudentService;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
 {
+
+    protected $studentService;
+
+    public function __construct(StudentService $studentService)
+    {
+        $this->studentService = $studentService;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
+        $perPage = (int) $request->get('perPage', 20);
+        $keywords = (string) strip_tags($request->get('keywords'));
 
-       return $students;
+        $students = $this->studentService->getStudents($perPage, $keywords);
+
+        return $students;
     }
 
     /**
