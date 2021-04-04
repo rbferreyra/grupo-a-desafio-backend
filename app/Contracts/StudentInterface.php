@@ -8,5 +8,5 @@ interface StudentInterface
     public function getStudent(string $id);
     public function createStudent(array $data);
     public function updateStudent(string $id, array $data);
-    public function destroyStudent($id);
+    public function destroyStudent(string $id);
 }

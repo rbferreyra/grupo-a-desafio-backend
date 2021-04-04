@@ -85,7 +85,7 @@ class StudentsController extends Controller
     public function update(UpdateStudentRequest $request, $id)
     {
         try {
-            $student = $this->studentService->getStudent($id);
+            $student = $this->studentService->getStudent($id)->respond(202);
 
             if (!$student) {
                 return $this->responder->error(404, 'Student not found or not exists!')->respond(404);
@@ -105,11 +105,15 @@ class StudentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $id
+     * @return \Flugg\Responder\Http\Responses\SuccessResponseBuilder
      */
     public function destroy($id)
     {
-        echo 'deletar um estudante ' . $id;
+        if ($this->studentService->destroyStudent($id)) {
+            return $this->responder->success()->respond(204);
+        } else {
+            return $this->responder->error(500, 'An error occurred while trying to delete the student!')->respond(500);
+        }
     }
 }
