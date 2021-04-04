@@ -36,8 +36,9 @@ class StudentRepository implements StudentInterface
     {
     }
 
-    public function createStudent($data)
+    public function createStudent(array $data): Student
     {
+        return $this->entity->create($data);
     }
 
     public function updateStudent($id, $data)
