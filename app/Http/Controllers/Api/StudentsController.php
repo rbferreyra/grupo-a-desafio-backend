@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStudentRequest;
 use App\Services\StudentService;
-use Illuminate\Http\Request;
+use Exception;
 use Flugg\Responder\Responder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class StudentsController extends Controller
 {
@@ -38,8 +40,8 @@ class StudentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\CreateStudentRequest  $request
+     * @return \Flugg\Responder\Http\Responses\SuccessResponseBuilder
      */
     public function store(CreateStudentRequest $request)
     {
@@ -53,12 +55,23 @@ class StudentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $id
+     * @return \Flugg\Responder\Http\Responses\SuccessResponseBuilder
      */
     public function show($id)
     {
-        echo 'exibir o estudante ' . $id;
+        try {
+            $student = $this->studentService->getStudent($id);
+
+            if (!$student) {
+                return $this->responder->error(404, 'Student not found or not exists!')->respond(404);
+            }
+
+            return $this->responder->success($student);
+        } catch (Exception $e) {
+            Log::error($e);
+            return $this->responder->error(500, 'An error occurred while trying to fetch the student!')->respond(500);
+        }
     }
 
     /**
