@@ -72,5 +72,5 @@ php artisan serve
 Executar testes da aplicação
 
 ```bash
-./vendor/bind/pest
+./vendor/bin/pest --filter studentTest 
 ```
