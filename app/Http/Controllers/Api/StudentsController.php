@@ -85,17 +85,23 @@ class StudentsController extends Controller
     public function update(UpdateStudentRequest $request, $id)
     {
         try {
-            $student = $this->studentService->getStudent($id)->respond(202);
+            $student = $this->studentService->getStudent($id);
 
             if (!$student) {
                 return $this->responder->error(404, 'Student not found or not exists!')->respond(404);
             }
 
             $data = $request->all();
+            
+            //não atualizar o ra
+            unset($data['ra']);
+
+            //não atualizar o cpf
+            unset($data['cpf']);
 
             $newStudent = $this->studentService->updateStudent($id, $data);
 
-            return $this->responder->success($newStudent);
+            return $this->responder->success($newStudent)->respond(202);
         } catch (Exception $e) {
             Log::error($e);
             return $this->responder->error(500, 'An error occurred while trying to update the student!')->respond(500);
