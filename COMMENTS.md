@@ -17,9 +17,9 @@
 3. O que você melhoraria se tivesse mais tempo
 
     - Implementar autenticação
-    - Realizar testes unitários
     - Utilizar o Docker
+    - Testes mais detalhado
 
 4. Quais requisitos obrigatórios que não foram entregues
 
-Não foi realizado os testes unitários.
+Não foi feito o frontend da aplicação. Como nã possuo experiência com a ferramenta do Vue, tive contato apenas com o React. Dessa forma, demanda um tempo para realizar um estudo sobre a ferramenta.
