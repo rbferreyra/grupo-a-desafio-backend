@@ -66,3 +66,11 @@ php artisan serve
   - PUT: /api/v1/students/1
 - Remover estudante
   - DELETE: /api/v1/students/1
+
+## Teste
+
+Executar testes da aplicação
+
+```bash
+./vendor/bind/pest
+```
