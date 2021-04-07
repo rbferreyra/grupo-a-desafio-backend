@@ -28,6 +28,7 @@ class StudentRepository implements StudentInterface
                     ->orWhere('cpf', 'like', "%${keywords}%");
             }
         })
+            ->orderBy('created_at', 'DESC')
             ->paginate($perPage)
             ->appends($this->request->query());
     }
