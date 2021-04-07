@@ -24,14 +24,21 @@ class UpdateStudentRequest extends FormRequest
      */
     public function rules()
     {
-
-        Log::info($this->route('id'));
-
         return [
             'name'  => ['required', 'min:3', 'max:100'],
             'email' => ['required', 'email'],
             'cpf'   => ['required', 'min:11', 'max:14'],
             'ra'    => ['required', 'min:6', 'max:20', 'unique:students,ra,' . $this->route('id') . ',id'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name'  => 'Nome',
+            'email' => 'E-mail',
+            'cpf'   => 'CPF',
+            'ra'    => 'RA',
         ];
     }
 }

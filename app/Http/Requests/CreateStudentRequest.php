@@ -30,4 +30,14 @@ class CreateStudentRequest extends FormRequest
             'ra'    => ['required', 'min:6', 'max:20', 'unique:students,ra'],
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name'  => 'Nome',
+            'email' => 'E-mail',
+            'cpf'   => 'CPF',
+            'ra'    => 'RA',
+        ];
+    }
 }
