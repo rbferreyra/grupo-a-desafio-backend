@@ -22,4 +22,4 @@
 
 4. Quais requisitos obrigatórios que não foram entregues
 
-Não foi feito o frontend da aplicação. Como nã possuo experiência com a ferramenta do Vue, tive contato apenas com o React. Dessa forma, demanda um tempo para realizar um estudo sobre a ferramenta.
+Todos os requisitos entregues.
